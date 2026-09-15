@@ -119,29 +119,12 @@ pipeline = get_pipeline()
 st.markdown(
     """
     <div class="main-header">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <h1 style="margin: 0; font-size: 26px; color: #38bdf8;">👁️ Explainable AI for Diabetic Retinopathy Screening</h1>
-                <p style="margin: 4px 0 0 0; color: #94a3b8; font-size: 14px;">
-                    Smart India Hackathon SIH 26038 | High-Throughput Tele-Ophthalmology for Rural India
-                </p>
-            </div>
-            <div style="text-align: right;">
-                <span style="background: #0284c7; color: white; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">
-                    v2.4.0 Greenfield
-                </span>
-            </div>
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-# Prototype Disclaimer Banner
-st.markdown(
-    """
-    <div class="disclaimer-banner">
-        ⚠️ <strong>Research & Educational Prototype Disclaimer:</strong> This system is developed for the Smart India Hackathon (SIH 26038). It is NOT a certified medical diagnostic device and cannot replace clinical examination by a qualified ophthalmologist.
+        <h1 style="margin: 0; font-size: 30px; color: #38bdf8;">
+            RetinaView
+        </h1>
+        <p style="margin: 6px 0 0; font-size: 15px; color: #94a3b8;">
+            AI-Assisted Retinal Screening &amp; Clinical Review
+        </p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -149,7 +132,27 @@ st.markdown(
 
 
 
-pipeline.temperature_scaler.temperature.data.fill_(temp_scaling)
+# Keep the pipeline's configured temperature instead of overwriting the shared
+# cached model with an undefined UI value.
+
+# Define image inputs before the navigation tabs and inference run.
+uploaded_img = None
+with st.sidebar:
+    st.header("Screening inputs")
+    uploaded_file = st.file_uploader(
+        "Upload a retinal fundus image",
+        type=["jpg", "jpeg", "png", "tif", "tiff", "bmp"],
+        key="fundus_image_upload",
+    )
+    # Always request full analysis for this research prototype.
+    force_analysis = True
+
+    if uploaded_file is not None:
+        try:
+            with Image.open(uploaded_file) as image:
+                uploaded_img = image.convert("RGB")
+        except (OSError, ValueError) as exc:
+            st.error(f"Unable to read this image. Please upload a valid image. {exc}")
 
 # Navigation Tabs
 tabs = st.tabs([
@@ -294,7 +297,7 @@ with tabs[3]:
     st.subheader("🩺 Retinal Structures & Lesion Extraction")
     
     if pipeline_result is None or not pipeline_result.get("is_gradeable"):
-        st.warning("Retinal structure and lesion analysis is suspended because the image was flagged as UNGRADEABLE. (Enable force analysis in sidebar to override).")
+        st.warning("Retinal structure and lesion analysis is suspended because the image was flagged as UNGRADEABLE.")
     else:
         struct = pipeline_result.get("structures", {})
         les = pipeline_result.get("lesions", {})
@@ -520,13 +523,3 @@ with tabs[7]:
         scenarios_df = pd.DataFrame(sim_res["scenarios"])
         st.dataframe(scenarios_df, hide_index=True, use_container_width=True)
 
-# Footer
-st.markdown("---")
-st.markdown(
-    """
-    <div style="text-align: center; color: #64748b; font-size: 12px; padding: 12px;">
-        SIH 26038 | Explainable AI for Diabetic Retinopathy Screening in Rural India | Research & Educational Prototype
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
