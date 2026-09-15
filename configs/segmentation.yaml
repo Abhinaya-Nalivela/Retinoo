@@ -1,0 +1,27 @@
+# Segmentation and Structure Extraction Configuration (SIH 26038)
+segmentation:
+  vessels:
+    model: "unet"
+    input_channels: 3
+    output_classes: 1
+    patch_size: 512
+    threshold: 0.5
+    classical_fallback: true
+  optic_disc:
+    method: "brightest_region_morphology"
+    blur_kernel: 35
+    min_confidence: 0.4
+  fovea:
+    method: "anatomical_temporal_offset"
+    distance_disc_diameters: 2.5
+    dark_roi_search: true
+  lesions:
+    microaneurysms:
+      enabled: true
+      kernel_size: 9
+    hemorrhages:
+      enabled: true
+      kernel_size: 25
+    exudates:
+      enabled: true
+      clahe_clip: 2.5

@@ -1,0 +1,35 @@
+# ==============================================================================
+# SIH 26038: Explainable AI for Diabetic Retinopathy Screening in Rural India
+# Python Dependency Specification
+# ==============================================================================
+
+# Core Deep Learning and Tensor Frameworks
+# Using CPU‑only PyTorch to avoid CUDA DLL issues
+torch>=2.3,<2.4
+torchvision>=0.18,<0.19
+
+# Scientific Computing & Data Structures
+numpy<2,>=1.24.0
+scipy>=1.10.0
+pandas>=2.0.0
+scikit-learn>=1.2.0
+
+# Computer Vision & Medical Image Processing
+opencv-python-headless>=4.8.0
+albumentations>=1.3.0
+Pillow>=9.5.0
+
+# Visualization, Explainability & Calibration
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Configuration, Logging & Progress Tracking
+pyyaml>=6.0
+tqdm>=4.65.0
+
+# Demonstration Clinical Web Interface (Streamlit)
+streamlit>=1.28.0
+
+# Verification & Test Infrastructure
+pytest>=7.3.0
+pytest-cov>=4.1.0

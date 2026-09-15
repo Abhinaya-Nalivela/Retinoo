@@ -1,0 +1,29 @@
+# SIH 26038 Git Ignore
+
+# Large datasets & raw clinical images
+data/raw/
+data/processed/
+data/sample_images/
+
+# Large model binaries and checkpoints
+*.pth
+*.pt
+*.onnx
+*.slx
+*.mat
+
+# Python bytecode & environments
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+env/
+venv/
+
+# Logs & temporary run outputs
+*.log
+reports/logs/*.log
+reports/runs/
