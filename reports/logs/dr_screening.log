@@ -1,0 +1,26 @@
+[2026-09-12 19:42:30] [CRITICAL] [MessidorLoader] - DATA LEAK DETECTED: External test image 'im00123' found in training manifest: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmp_36pqe3d/leaked_splits.json
+[2026-09-12 19:42:46] [INFO] [AptosLoader] - Saved stratified APTOS 2019 splits to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpm1gayvo0/aptos/test_splits.json
+[2026-09-12 19:42:46] [CRITICAL] [MessidorLoader] - DATA LEAK DETECTED: External test image 'im00123' found in training manifest: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpv6hriko9/leaked_splits.json
+[2026-09-12 19:43:03] [INFO] [AptosLoader] - Saved stratified APTOS 2019 splits to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmptx9rph6s/aptos/test_splits.json
+[2026-09-12 19:43:03] [CRITICAL] [MessidorLoader] - DATA LEAK DETECTED: External test image 'im00123' found in training manifest: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpa3ohoy0i/leaked_splits.json
+[2026-09-12 19:44:58] [INFO] [PreprocessingCompare] - Using synthetic fundus image for visual preprocessing demonstration.
+[2026-09-12 19:44:59] [INFO] [PreprocessingCompare] - Generated preprocessing comparison report at: /Users/sathwikakandi/SIH/reports/runs/preprocessing_comparisons/preprocessing_stages.png
+[2026-09-12 19:45:48] [INFO] [AptosLoader] - Saved stratified APTOS 2019 splits to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmprulyczw9/aptos/test_splits.json
+[2026-09-12 19:45:48] [CRITICAL] [MessidorLoader] - DATA LEAK DETECTED: External test image 'im00123' found in training manifest: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmp0uthg1c9/leaked_splits.json
+[2026-09-12 19:45:49] [INFO] [RetinalPreprocessor] - Saved preprocessed image to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpv3aox41h/sample1_out.png
+[2026-09-12 19:45:49] [INFO] [RetinalPreprocessor] - Saved preprocessed image to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpv3aox41h/batch_out/sample1_processed.png
+[2026-09-12 19:45:49] [INFO] [RetinalPreprocessor] - Saved preprocessed image to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpv3aox41h/batch_out/sample2_processed.png
+[2026-09-12 19:48:10] [INFO] [AptosLoader] - Saved stratified APTOS 2019 splits to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmp5df1jq0o/aptos/test_splits.json
+[2026-09-12 19:48:10] [CRITICAL] [MessidorLoader] - DATA LEAK DETECTED: External test image 'im00123' found in training manifest: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpoyc5e2jx/leaked_splits.json
+[2026-09-12 19:48:11] [INFO] [RetinalPreprocessor] - Saved preprocessed image to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpfs7t5dn7/sample1_out.png
+[2026-09-12 19:48:11] [INFO] [RetinalPreprocessor] - Saved preprocessed image to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpfs7t5dn7/batch_out/sample1_processed.png
+[2026-09-12 19:48:11] [INFO] [RetinalPreprocessor] - Saved preprocessed image to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpfs7t5dn7/batch_out/sample2_processed.png
+[2026-09-12 19:48:56] [INFO] [AptosLoader] - Saved stratified APTOS 2019 splits to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmptzpc7oti/aptos/test_splits.json
+[2026-09-12 19:48:56] [CRITICAL] [MessidorLoader] - DATA LEAK DETECTED: External test image 'im00123' found in training manifest: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpfi_gurt6/leaked_splits.json
+[2026-09-12 19:48:56] [INFO] [RetinalPreprocessor] - Saved preprocessed image to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpssbuz0c7/sample1_out.png
+[2026-09-12 19:48:56] [INFO] [RetinalPreprocessor] - Saved preprocessed image to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpssbuz0c7/batch_out/sample1_processed.png
+[2026-09-12 19:48:56] [INFO] [RetinalPreprocessor] - Saved preprocessed image to: /var/folders/4q/9r4sfwc10cz2m7mvty729w1r0000gn/T/tmpssbuz0c7/batch_out/sample2_processed.png
+[2026-09-12 19:51:10] [INFO] [DRInference] - No trained checkpoint found on disk. Initialized with baseline architecture.
+[2026-09-15 12:18:25] [INFO] [InferencePipeline] - Loaded classifier weights from C:\Retino\models\classification\dr_classifier.pth
+[2026-09-15 12:46:24] [INFO] [InferencePipeline] - Loaded classifier weights from C:\Retino\models\classification\dr_classifier.pth
+[2026-09-15 13:13:44] [INFO] [InferencePipeline] - Loaded classifier weights from C:\Retino\models\classification\dr_classifier.pth
