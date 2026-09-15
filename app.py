@@ -147,40 +147,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Sidebar: Controls & Sample Selector
-st.sidebar.header("🔬 Screening Controls")
 
-preset_options = {
-    "Level 0 — Healthy Retina (Normal)": "data/sample_images/healthy_retina.jpg",
-    "Level 1 — Mild NPDR (Microaneurysms)": "data/sample_images/mild_npdr.jpg",
-    "Level 2 — Moderate NPDR (Referable)": "data/sample_images/moderate_npdr.jpg",
-    "Level 3 — Severe NPDR (High Risk)": "data/sample_images/severe_npdr.jpg",
-    "Level 4 — Proliferative DR (Urgent Referral)": "data/sample_images/proliferative_dr.jpg",
-    "Quality Defect: Blurry / Poor Focus": "data/sample_images/blurry_retina.jpg",
-    "Quality Defect: Underexposed / Dark": "data/sample_images/underexposed_retina.jpg",
-    "Quality Defect: Overexposed / Washed Out": "data/sample_images/overexposed_retina.jpg",
-    "Quality Defect: Incomplete / Cut-off FOV": "data/sample_images/cutoff_fov_retina.jpg",
-    "Custom Fundus Upload...": None,
-}
-
-selected_preset = st.sidebar.selectbox("Select Retinal Case Preset", list(preset_options.keys()))
-
-uploaded_img = None
-if preset_options[selected_preset] is not None:
-    preset_path = ROOT_DIR / preset_options[selected_preset]
-    if preset_path.exists():
-        uploaded_img = Image.open(preset_path).convert("RGB")
-    else:
-        st.sidebar.warning(f"Preset file not found: {preset_path}. Using synthetic healthy retina.")
-else:
-    file_upload = st.sidebar.file_uploader("Upload Fundus Image", type=["jpg", "jpeg", "png", "tif", "dcm"])
-    if file_upload is not None:
-        uploaded_img = Image.open(file_upload).convert("RGB")
-
-st.sidebar.markdown("---")
-st.sidebar.subheader("⚙️ Clinical Configuration")
-force_analysis = st.sidebar.checkbox("Force full analysis on Ungradeable images", value=False)
-temp_scaling = st.sidebar.slider("Temperature Scaling (T)", min_value=1.0, max_value=3.0, value=1.5, step=0.1)
 
 pipeline.temperature_scaler.temperature.data.fill_(temp_scaling)
 
@@ -464,7 +431,7 @@ with tabs[6]:
     if pipeline_result is None:
         st.info("Select or upload an image to generate a clinical screening report.")
     else:
-        case_id = f"DR-CASE-{abs(hash(selected_preset)) % 10000:04d}"
+        case_id = f"DR-CASE-{abs(hash('custom')) % 10000:04d}"
         html_report = ClinicalReportGenerator.generate_html_report(pipeline_result, case_id=case_id)
         
         c_r1, c_r2 = st.columns([3, 1])

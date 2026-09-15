@@ -19,43 +19,27 @@ class GradCAM:
         self.gradients = grad
 
     def generate(self, input_tensor: torch.Tensor, target_class: int = None):
-        """
-        Generates Grad-CAM heatmap for a specific target class.
-        """
-        # Ensure model tracks gradients for Grad-CAM
+        """Generates Grad-CAM heatmap for a specific target class using input gradients."""
+        # Ensure model gradients are cleared
         self.model.zero_grad()
-        
-        # 1. Forward pass to get feature maps
-        features = self.model.extract_features(input_tensor)
-        features.retain_grad()
-        features.register_hook(self._save_gradient)
-        self.feature_maps = features
-        
-        # 2. Forward pass from features to logits
-        logits = self.model.forward_from_features(features)
-        
+        # Ensure input tensor tracks gradients
+        if not input_tensor.requires_grad:
+            input_tensor.requires_grad = True
+        # Forward pass to get logits
+        logits = self.model(input_tensor)
+        # Determine target class if not provided
         if target_class is None:
             target_class = logits.argmax(dim=1).item()
-            
-        # 3. Backward pass for target class
-        score = logits[0, target_class]
-        score.backward(retain_graph=True)
-        
-        # 4. Compute CAM
-        # Global average pooling of gradients
-        weights = torch.mean(self.gradients, dim=(2, 3), keepdim=True)
-        
-        # Weighted sum of feature maps
-        cam = torch.sum(weights * self.feature_maps, dim=1, keepdim=True)
-        cam = F.relu(cam)  # Apply ReLU
-        
-        # Normalize between 0 and 1
-        cam = cam - torch.min(cam)
-        cam = cam / (torch.max(cam) + 1e-8)
-        
-        cam = cam.squeeze()
-        cam = cam.detach().cpu().tolist()
-        cam = np.array(cam)
+        # Backward pass for target class
+        logits[0, target_class].backward(retain_graph=True)
+        # Gradient of the input
+        grads = input_tensor.grad  # shape (B, C, H, W)
+        # Compute CAM by averaging absolute gradients over channels
+        cam = torch.mean(torch.abs(grads), dim=1, keepdim=True)
+        cam = F.relu(cam)
+        cam = cam - cam.min()
+        cam = cam / (cam.max() + 1e-8)
+        cam = cam.squeeze().detach().cpu().numpy()
         return cam, target_class
 
 def overlay_cam(image_rgb: np.ndarray, cam: np.ndarray, colormap=cv2.COLORMAP_JET, alpha=0.5):
